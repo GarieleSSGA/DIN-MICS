@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANÁLISIS DE ACTIVIDAD VOLCÁNICA - DINÁMICA - UCV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="background.mp4" type="video/mp4">
+            Tu navegador no soporta el video en HTML5.
+        </video>
+    </div>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>ANÁLISIS DE ACTIVIDAD VOLCÁNICA - DINÁMICA - UCV</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#activity">Seguimiento de Actividad Volcánica</a></li>
+                <li><a href="#ai">Análisis con IA</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Bienvenido a la Página Principal</h2>
+            <!-- Contenido de la página principal -->
+        </section>
+        <section id="activity">
+            <h2>Seguimiento de Actividad Volcánica</h2>
+            <input type="file" id="input-excel" />
+            <button onclick="processData()">Procesar Datos</button>
+            <div id="result">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Mes</th>
+                            <th>Año</th>
+                            <th>SO2</th>
+                            <th>Actividad Sísmica</th>
+                            <th>Altura Máxima (Cenizas y Gases)</th>
+                            <th>Índice Compuesto</th>
+                            <th>Índice de Evaluación</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <canvas id="myChart"></canvas>
+        </section>
+        <section id="ai">
+            <h2>Análisis con IA</h2>
+            <textarea id="ai-input" rows="4" cols="50" placeholder="Escribe tu pregunta aquí..."></textarea>
+            <button onclick="analyzeData()">Analizar</button>
+            <div id="ai-response"></div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
