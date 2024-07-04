@@ -219,9 +219,31 @@ footer p {
   header h1 {
       font-size: 2em;
   }
-  
+
   button {
       width: 100%;
       text-align: center;
   }
+}
+
+/* Estilos para la sección de días de erupción */
+#eruption-days {
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  color: #ff4500; /* Letra roja */
+  padding: 1em;
+  border-radius: 10px;
+  margin-top: 2em;
+}
+
+#eruption-days h2 {
+  color: #fff;
+  font-size: 1.8em;
+  border-bottom: 2px solid #ff4500;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+.eruption-info {
+  color: #fff; /* Letra blanca */
+  font-size: 1.1em;
 }
