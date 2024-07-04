@@ -17,13 +17,12 @@ function processData() {
         const worksheet = workbook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(worksheet);
 
-        // Guardar los datos en localStorage para uso posterior
-        localStorage.setItem('volcanoData', JSON.stringify(json));
-
+        // Calcular máximos para el índice compuesto
         const so2Max = Math.max(...json.map(row => row['SO2']));
         const seismicMax = Math.max(...json.map(row => row['Actividad Sísmica']));
         const heightMax = Math.max(...json.map(row => row['Altura Máxima']));
 
+        // Calcular índice compuesto y evaluación para cada registro
         const results = json.map(row => {
             const so2 = row['SO2'];
             const seismic = row['Actividad Sísmica'];
@@ -39,8 +38,11 @@ function processData() {
             } else {
                 evaluation = 'Erupción crítica';
             }
-            return { ...row, index: index.toFixed(2), evaluation: evaluation };
+            return { ...row, 'Índice Compuesto': index.toFixed(2), 'Índice de Evaluación': evaluation };
         });
+
+        // Guardar los datos en localStorage para uso posterior
+        localStorage.setItem('volcanoData', JSON.stringify(results));
 
         displayResults(results);
         createChart(results);
@@ -62,8 +64,8 @@ function displayResults(results) {
         newRow.insertCell().innerText = row['SO2'];
         newRow.insertCell().innerText = row['Actividad Sísmica'];
         newRow.insertCell().innerText = row['Altura Máxima'];
-        newRow.insertCell().innerText = row['index'];
-        newRow.insertCell().innerText = row['evaluation'];
+        newRow.insertCell().innerText = row['Índice Compuesto']; // Usamos 'Índice Compuesto' en lugar de 'index'
+        newRow.insertCell().innerText = row['Índice de Evaluación']; // Usamos 'Índice de Evaluación' en lugar de 'evaluation'
     });
 }
 
@@ -71,7 +73,7 @@ function displayResults(results) {
 function createChart(data) {
     const ctx = document.getElementById('myChart').getContext('2d');
     const labels = data.map(row => `Día ${row['Día']}`);
-    const indices = data.map(row => parseFloat(row['index']));
+    const indices = data.map(row => parseFloat(row['Índice Compuesto'])); // Usamos 'Índice Compuesto'
 
     new Chart(ctx, {
         type: 'line',
@@ -108,33 +110,37 @@ function downloadPDF() {
 
     // Añadir título y tabla al PDF
     doc.setFontSize(16);
+    doc.setTextColor(0, 0, 255);
     doc.text('Reporte de Actividad Volcánica', 10, 10);
     doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
     doc.text('Aquí tienes un análisis completo de los datos volcánicos registrados.', 10, 20);
 
     // Añadir tabla
     const data = JSON.parse(localStorage.getItem('volcanoData'));
-    let row = 30;
-    doc.text('Día', 10, row);
-    doc.text('Mes', 20, row);
-    doc.text('Año', 30, row);
-    doc.text('SO2', 40, row);
-    doc.text('Actividad Sísmica', 50, row);
-    doc.text('Altura Máxima', 70, row);
-    doc.text('Índice Compuesto', 100, row);
-    doc.text('Índice de Evaluación', 130, row);
-    row += 10;
+    const tableRows = [];
 
-    data.forEach((item, index) => {
-        doc.text(`${item['Día']}`, 10, row);
-        doc.text(`${item['Mes']}`, 20, row);
-        doc.text(`${item['Año']}`, 30, row);
-        doc.text(`${item['SO2']}`, 40, row);
-        doc.text(`${item['Actividad Sísmica']}`, 50, row);
-        doc.text(`${item['Altura Máxima']}`, 70, row);
-        doc.text(`${item['index']}`, 100, row);
-        doc.text(`${item['evaluation']}`, 130, row);
-        row += 10;
+    data.forEach(item => {
+        const rowData = [
+            item['Día'], 
+            item['Mes'], 
+            item['Año'], 
+            item['SO2'], 
+            item['Actividad Sísmica'], 
+            item['Altura Máxima'], 
+            item['Índice Compuesto'], // Usamos 'Índice Compuesto'
+            item['Índice de Evaluación'] // Usamos 'Índice de Evaluación'
+        ];
+        tableRows.push(rowData);
+    });
+
+    doc.autoTable({
+        head: [['Día', 'Mes', 'Año', 'SO2', 'Actividad Sísmica', 'Altura Máxima', 'Índice Compuesto', 'Índice de Evaluación']],
+        body: tableRows,
+        startY: 30,
+        styles: { fillColor: [255, 0, 0] },
+        headStyles: { fillColor: [0, 0, 255] },
+        theme: 'grid'
     });
 
     // Añadir gráfico
@@ -145,8 +151,10 @@ function downloadPDF() {
 
         // Añadir comentario alegre y frase motivadora
         doc.setFontSize(16);
+        doc.setTextColor(0, 128, 0);
         doc.text('¡Buen trabajo!', 10, 120);
         doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
         doc.text('Sigue adelante con este excelente proyecto. ¡Estás haciendo una gran diferencia!', 10, 130);
         doc.text('Frase motivadora: "El éxito es la suma de pequeños esfuerzos repetidos día tras día." - Robert Collier', 10, 140);
 

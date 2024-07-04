@@ -1,117 +1,19 @@
-/* Estilos generales */
+/* Reset de estilos y configuración básica */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0; /* Color de fondo general */
-}
-
-header {
-  background-color: #333; /* Fondo del encabezado */
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  position: relative;
-}
-
-header .logo {
-  max-width: 100px;
-  height: auto;
-}
-
-header nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-header nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-header nav ul li a:hover {
-  color: #ffc107; /* Color al pasar el mouse */
-}
-
-/* Estilos para las secciones */
-section {
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 800px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-section h2 {
-  color: #333;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #333;
-  padding-bottom: 5px;
-}
-
-/* Estilos para la tabla de datos */
-#data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-#data-table th, #data-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-#data-table th {
-  background-color: #f2f2f2;
-}
-
-#data-table tbody tr:nth-child(even) {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
   background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
 }
 
-/* Estilos para el gráfico */
-#myChart {
-  max-width: 100%;
-  margin-top: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* Estilos para el área de análisis con IA */
-#ai {
-  text-align: center;
-}
-
-#ai-input {
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#ai-response {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Estilos para el video de fondo */
+/* Estilo para el contenedor principal */
 .video-background {
   position: fixed;
   top: 0;
@@ -125,15 +27,200 @@ section h2 {
 #bg-video {
   min-width: 100%;
   min-height: 100%;
+  object-fit: cover;
 }
 
-/* Estilos para el footer (opcional) */
-footer {
-  text-align: center;
-  padding: 10px;
+/* Estilos para el encabezado */
+header {
   background-color: #333;
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+header .logo {
+  width: 80px;
+  height: auto;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+  color: #ffd700;
+}
+
+/* Estilos para el contenido principal */
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* Estilos para formularios y tablas */
+input[type="file"], button {
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+input[type="file"]:hover, button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  margin-top: 20px;
+}
+
+#data-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+#data-table th, #data-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#data-table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#data-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#data-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Estilos para gráficos */
+canvas#myChart {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+}
+
+/* Estilos para análisis con IA */
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para botones */
+button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Estilos para la respuesta del análisis con IA */
+#ai-response {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Estilos específicos para impresión */
+@media print {
+  body {
+      font-size: 10pt;
+  }
+  h1, h2 {
+      page-break-before: always;
+  }
+  #bg-video {
+      display: none;
+  }
+}
+/* Estilos para el encabezado */
+header {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+  width: 80px;
+  height: auto;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+  color: #ffd700;
+}
+
