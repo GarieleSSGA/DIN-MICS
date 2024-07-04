@@ -71,7 +71,7 @@ function displayResults(results) {
 function createChart(data) {
     const ctx = document.getElementById('myChart').getContext('2d');
     const labels = data.map(row => `Día ${row['Día']}`);
-    const indices = data.map(row => parseFloat(row.index));
+    const indices = data.map(row => parseFloat(row['index']));
 
     new Chart(ctx, {
         type: 'line',
@@ -96,5 +96,61 @@ function createChart(data) {
                 }
             }
         }
+    });
+}
+
+// Función para descargar el reporte en PDF
+function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+
+    // Crear nuevo PDF
+    const doc = new jsPDF();
+
+    // Añadir título y tabla al PDF
+    doc.setFontSize(16);
+    doc.text('Reporte de Actividad Volcánica', 10, 10);
+    doc.setFontSize(12);
+    doc.text('Aquí tienes un análisis completo de los datos volcánicos registrados.', 10, 20);
+
+    // Añadir tabla
+    const data = JSON.parse(localStorage.getItem('volcanoData'));
+    let row = 30;
+    doc.text('Día', 10, row);
+    doc.text('Mes', 20, row);
+    doc.text('Año', 30, row);
+    doc.text('SO2', 40, row);
+    doc.text('Actividad Sísmica', 50, row);
+    doc.text('Altura Máxima', 70, row);
+    doc.text('Índice Compuesto', 100, row);
+    doc.text('Índice de Evaluación', 130, row);
+    row += 10;
+
+    data.forEach((item, index) => {
+        doc.text(`${item['Día']}`, 10, row);
+        doc.text(`${item['Mes']}`, 20, row);
+        doc.text(`${item['Año']}`, 30, row);
+        doc.text(`${item['SO2']}`, 40, row);
+        doc.text(`${item['Actividad Sísmica']}`, 50, row);
+        doc.text(`${item['Altura Máxima']}`, 70, row);
+        doc.text(`${item['index']}`, 100, row);
+        doc.text(`${item['evaluation']}`, 130, row);
+        row += 10;
+    });
+
+    // Añadir gráfico
+    html2canvas(document.getElementById('myChart')).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        doc.addPage();
+        doc.addImage(imgData, 'PNG', 10, 10, 180, 100);
+
+        // Añadir comentario alegre y frase motivadora
+        doc.setFontSize(16);
+        doc.text('¡Buen trabajo!', 10, 120);
+        doc.setFontSize(12);
+        doc.text('Sigue adelante con este excelente proyecto. ¡Estás haciendo una gran diferencia!', 10, 130);
+        doc.text('Frase motivadora: "El éxito es la suma de pequeños esfuerzos repetidos día tras día." - Robert Collier', 10, 140);
+
+        // Descargar PDF
+        doc.save('reporte_volcanico.pdf');
     });
 }
