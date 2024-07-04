@@ -4,7 +4,7 @@ body, html {
   padding: 0;
   font-family: 'Arial', sans-serif;
   background-color: #f0f0f0;
-  color: #333;
+  color: #063c2c;
   line-height: 1.6;
 }
 
@@ -22,7 +22,7 @@ header h1 {
   margin: 0;
   font-size: 2.5em;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.164);
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   border-radius: 10px;
   color: #ff4500; /* Letra roja */
@@ -49,7 +49,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #57575725;
+  background-color: #575757;
 }
 
 /* Video Background */
@@ -86,7 +86,7 @@ section {
 }
 
 h2 {
-  color: #f7b4b4;
+  color: #fe0b0b;
   font-size: 1.5em;
   border-bottom: 2px solid #333;
   padding-bottom: 0.5em;
@@ -110,7 +110,7 @@ input[type="number"], input[type="file"], textarea {
 
 button {
   padding: 0.7em 1.5em;
-  background-color: #ffdbdb;
+  background-color: #e364c1;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -121,12 +121,12 @@ button {
 }
 
 button:hover {
-  background-color: #ffcdcd;
+  background-color: #575757;
   transform: scale(1.05);
 }
 
 button:active {
-  background-color: #ffc9c9;
+  background-color: #444;
 }
 
 /* Table Styles */
@@ -228,7 +228,7 @@ footer p {
 
 /* Estilos para la sección de días de erupción */
 #eruption-days {
-  background-color: rgba(0, 0, 0, 0.342); /* Fondo oscuro */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
   color: #ff4500; /* Letra roja */
   padding: 1em;
   border-radius: 10px;
